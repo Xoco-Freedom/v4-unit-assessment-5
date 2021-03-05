@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { updateUser, logout } from "../../redux/reducer";
 import homeLogo from "./../../assets/home_logo.png";
 import newLogo from "./../../assets/new_logo.png";
 import logoutLogo from "./../../assets/shut_down.png";
@@ -31,11 +33,15 @@ class Nav extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       this.props.location.pathname !== "/" && (
         <div className="nav">
           <div className="nav-profile-container">
-            <div className="nav-profile-pic"></div>
+            <div
+              className="nav-profile-pic"
+              style={{ backgroundImage: "" }}
+            ></div>
             <p>placeholder username</p>
           </div>
           <div className="nav-links">
@@ -55,4 +61,8 @@ class Nav extends Component {
   }
 }
 
-export default withRouter(Nav);
+const mapStateToProps = (reduxState) => reduxState;
+
+export default withRouter(
+  connect(mapStateToProps, { updateUser, logout })(Nav)
+);
