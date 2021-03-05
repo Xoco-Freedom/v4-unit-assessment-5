@@ -7,14 +7,14 @@ const express = require("express"),
 
 const app = express();
 
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
-
 app.use(express.json());
+
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
 app.use(
   session({
-    resave: false,
-    saveUnitialized: true,
+    resave: true,
+    saveUninitialized: true,
     secret: SESSION_SECRET,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 365 },
   })
@@ -22,10 +22,10 @@ app.use(
 
 massive({
   connectionString: CONNECTION_STRING,
-  ssl: { rejectUnauthorized: false }.then((dbInstance) => {
-    app.set("db", dbInstance);
-    console_log("db connected");
-  }),
+  ssl: { rejectUnauthorized: false },
+}).then((dbInstance) => {
+  app.set("db", dbInstance);
+  console.log("db connected");
 });
 
 //Auth Endpoints
