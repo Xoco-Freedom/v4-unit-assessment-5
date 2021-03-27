@@ -14,21 +14,20 @@ export function updateUser(userObj) {
   };
 }
 
-export function logout(userObj) {
+export function logout() {
   return {
     type: LOGOUT_USER,
-    payload: {},
   };
 }
 
 export default function reducer(state = initialState, action) {
-  const { type, payload } = action;
+  let { type, payload } = action;
 
   switch (type) {
     case UPDATE_USER:
       return { ...state, user: payload };
     case LOGOUT_USER:
-      return { ...state, user: payload };
+      return initialState;
 
     default:
       return state;
