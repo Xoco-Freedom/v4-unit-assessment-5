@@ -3,13 +3,16 @@ const express = require("express"),
   userCtrl = require("./controllers/user"),
   postCtrl = require("./controllers/posts"),
   massive = require("massive"),
-  session = require("express-session");
+  session = require("express-session"),
+  cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+
+app.use(cors("*"));
 
 app.use(
   session({
