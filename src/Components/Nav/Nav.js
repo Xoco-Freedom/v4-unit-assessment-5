@@ -21,15 +21,15 @@ class Nav extends Component {
   }
 
   getUser() {
-    axios
-      .get("/api/auth/me")
-      .then((res) => "replace this string with something useful");
+    axios.get("/api/auth/me").then((res) => {
+      this.props.updateUser(res.data);
+    });
   }
 
   logout() {
-    axios
-      .post("/api/auth/logout")
-      .then((_) => "replace this string with something else");
+    axios.post("/api/auth/logout").then((res) => {
+      this.props.logout();
+    });
   }
 
   render() {
@@ -40,9 +40,9 @@ class Nav extends Component {
           <div className="nav-profile-container">
             <div
               className="nav-profile-pic"
-              style={{ backgroundImage: "" }}
+              style={{ backgroundImage: `url("${this.props.profile_pic}")` }}
             ></div>
-            <p>placeholder username</p>
+            <p>this.props.username</p>
           </div>
           <div className="nav-links">
             <Link to="/Dash">
@@ -61,7 +61,7 @@ class Nav extends Component {
   }
 }
 
-const mapStateToProps = (reduxState) => reduxState;
+const mapStateToProps = (state) => state;
 
 export default withRouter(
   connect(mapStateToProps, { updateUser, logout })(Nav)
