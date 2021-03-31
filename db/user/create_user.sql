@@ -7,4 +7,4 @@ insert into helo_users (
     ${hash},
     ${profile_pic}
 )
-returning *
+returning *;

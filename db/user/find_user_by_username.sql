@@ -1,2 +1,2 @@
 select * from helo_users
-where username = ${username}
+where username = ${username};
