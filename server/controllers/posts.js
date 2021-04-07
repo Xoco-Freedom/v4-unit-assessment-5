@@ -53,8 +53,12 @@ module.exports = {
     let date = new Date();
 
     if (id) {
-      db.post.create_post(id, title, img, content, date);
-      return res.sendStatus(200);
+      // db.post.create_post(id, title, img, content, date);
+      // return res.sendStatus(200);
+      req.app
+        .get("db")
+        .post.create_post([id, title, img, content, date])
+        .then((_) => res.status(200).send());
     } else {
       res.sendStatus(403);
     }
