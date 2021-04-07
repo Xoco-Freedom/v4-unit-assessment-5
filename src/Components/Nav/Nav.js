@@ -29,6 +29,7 @@ class Nav extends Component {
   logout() {
     axios.post("/api/auth/logout").then((res) => {
       this.props.logout();
+      this.props.history.push("/");
     });
   }
 
@@ -40,9 +41,11 @@ class Nav extends Component {
           <div className="nav-profile-container">
             <div
               className="nav-profile-pic"
-              style={{ backgroundImage: `url("${this.props.profile_pic}")` }}
+              style={{
+                backgroundImage: `url("${this.props.user.profile_pic}")`,
+              }}
             ></div>
-            <p>this.props.username</p>
+            <p>{this.props.user.username}</p>
           </div>
           <div className="nav-links">
             <Link to="/Dash">
